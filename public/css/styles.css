@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap');
+
+/*This is just styling. I kept a lot of it the same, however I changed some parts to make it look more weathery*/
+
+* {
+  text-align: center;
+  background-color: skyblue;
+}
+
+body {
+  margin: 5px;
+  font-family: "Calibri";
+}
+ul, li {
+  padding: 0;
+  list-style-type: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  column-gap: 25px;
+}
+header {
+  grid-column: span 3;
+  text-align: center;
+  border-bottom: 1px solid #000000;
+}
+nav {
+  padding: 25px;
+  border-right: 1px solid #000000;
+}
+nav li {
+  text-decoration: underline;
+}
+article {
+  padding: 25px;
+}
+article h2 {
+  font-size: 4em;
+  max-width: 800px;
+}
+article img {
+  width: 90%;
+}
+article p {
+  margin-top: 25px;
+  line-height: 1.5em;
+  color: #000000;
+}
+aside {
+  padding: 25px;
+  border-left: 1px solid #ffffff;
+}
+footer {
+  grid-column: span 3;
+  text-align: center;
+  border-top: 1px solid #000000;
+  padding: 10px;
+}
+
+/* responsive */
+@media screen and (max-width: 1200px) {
+  nav {
+    grid-column: span 3;
+    border-right: 0;
+    border-bottom: 1px solid #000000;
+  }
+  nav li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  article {
+    grid-column: span 2;
+  }
+  aside {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  nav, article, aside {
+    grid-column: span 3;
+  }
+  aside {
+    border-left: 0;
+    border-top: 1px solid #000000;
+  }
+  article h2 {
+    font-size: 2.5em;
+  }
+}
