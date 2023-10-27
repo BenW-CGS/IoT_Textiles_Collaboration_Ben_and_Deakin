@@ -1,0 +1,48 @@
+<!--This is the website-->
+<nav>
+  <!--Organise links to other pages-->
+  <p>Categories</p>
+  <li><a href="https://weather.com/en-AU/weather/today/l/ASXX0023:1:AS?Goto=Redirected">Weather</a></li>
+  <li><a href="#">Data</a></li>
+</nav>
+<article>
+  <!--Picture doesn't load. I think because of internet :( -->
+  <h2>The Moderate IoT Weather App</h2>
+  <img src="../public/assets/sun-50.png" width="75px" alt="article banner" />
+</article>
+<aside>
+  <ul>
+    <li>
+      <p><strong>Weather Now</strong></p>
+    </li>
+    <li>
+      <!--Getting all data from esp32-->
+      <!-- <p>Time: <span id="time2"><%= obj.updateTime %></span><br /></p> -->
+      <p>Current Temperature: <%= obj.temperature %>&deg;<br /></p>
+      <p>Current Humidity: <%= obj.humidity %>&percnt;<br /></p>
+    </li>
+    <li>
+      <p><strong>Sensor Info:</strong></p>
+    </li>
+    <li>
+      <p>Sensor: <%= obj.sensName %> <br /></p>
+      <p>Id: <%= obj.id %> <br /></p> 
+      <p>Hardware: <%= obj.hardware %> <br /></p> 
+      <p>Location: <%= obj.location %><br /></p>
+    </li>
+    <li>
+      <p><strong>Benjamin Fire Index</strong></p>
+    </li>
+    <li>
+      <p>The Fire Index is based on the temperature and humidity. It takes the square root of the dryness and square root of temperature, and adds it to the base, 1. 1-3 is low fire risk, 4-6 is medium, 7-9 is high, 10-12 is very high, 13-15 is extreme, and anything above is disasterous.</p>
+    </li>
+    <li>
+      <p>Current Fire Index: <%= obj.fireindex %></p>
+    </li>
+    <li>
+      <!--Who's Storm Rhyma? I don't get the reference.-->
+      <p><strong>Written by:</strong></p>
+      <p>Benjamin Wedding</p>
+    </li>
+  </ul>
+</aside>
