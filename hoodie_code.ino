@@ -110,9 +110,6 @@ int bluePin = 33;
 // Create aREST instance
 aREST rest = aREST();
 
-// Initialize DHT sensor
-DHT dht(DHTPIN, DHTTYPE, 15);
-
 // WiFi parameters. Get network and password to access internet.
 const char* ssid = "Proxima";
 const char* password = "centauri";
@@ -141,9 +138,6 @@ void setup(void)
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
-  
-  // Init DHT 
-  dht.begin();
   
   // Init variables and expose them to REST API
   rest.variable("temperature",&temperature);
@@ -187,46 +181,24 @@ void setup(void)
 }
 
 void loop() {
-  
-  // Reading temperature and humidity
-  temperature = dht.readTemperature();
-  humidity = dht.readHumidity();
-  fireindex = 1 + sqrt(100 - humidity) + sqrt(temperature);
 
-  // Prints data to serial.
-  Serial.print("Temperature: ");
-  Serial.println(temperature);
-  Serial.print("Humidity: ");
-  Serial.println(humidity);
-  //Fire index is my idea. See, I Do understand!
-  Serial.print("Benjamin's Fire Index: ");
-  Serial.println(fireindex);
-  Serial.print("Timer: ");
-  Serial.println(timer);
-  if (temperature < 5){
-    setColor(0, 0, 255);
-  } else if(temperature < 10){
-    setColor(33, 0, 166);
-  } else if (temperature < 15){
-    setColor(66, 0, 133);
-  } else if(temperature < 20){
-    setColor(100, 0, 100);
-  } else if (temperature < 25){
-    setColor(133, 0, 66);
-  } else if (temperature < 30){
-    setColor(166, 0, 33);
-  } else {
-    setColor(255, 0, 0);
-  }
-  delay(5000);
-  timer--;
+  // Plays song
+  for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
 
-  //Check running time and reset if expired
-  if (timer == 0 ) {
-    delay(3000);
-    Serial.println("Resetting..");
-    ESP.restart();
-  }
+    // calculates the duration of each note
+    divider = melody[thisNote + 1];
+    if (divider > 0) {
+      // regular note, just proceed
+      noteDuration = (wholenote) / divider;
+    } else if (divider < 0) {
+      // dotted notes are represented with negative durations!!
+      noteDuration = (wholenote) / abs(divider);
+      noteDuration *= 1.5; // increases the duration in half for dotted notes
+    }
+     tone(buzzer, melody[thisNote], noteDuration*0.9);
+     delay(noteDuration);
+     noTone(buzzer);
+
   
   // Handle REST calls
   WiFiClient client = server.available();
